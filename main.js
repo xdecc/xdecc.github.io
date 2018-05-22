@@ -63,6 +63,11 @@ function init()
     {
       if (entry.charAt(0) == "#") continue;
       var edata = /(.*) \((NG\+?[0-9]*)\) - (.*)(#d)?/.exec(entry);
+      if (!edata)
+      {
+        if (entry.trim().length != 0) console.warn("Invalid entry: \"" + entry + "\"");
+        continue;
+      }
       var weapon = findName(edata[1]);
       if (weapon == null)
       {
