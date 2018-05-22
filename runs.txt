@@ -1,0 +1,49 @@
+# Format: <weapon_name> (NG<+X>) - <nickname>[#d]
+# Adding #d to end will create an entry of shame.
+# No typos in weapon names allowed.
+Profaned Greatsword (NG) - ForgottenReaper
+Frayed Blade (NG+) - unrecovered
+Harald Curved Greatsword (NG+2) - TheLauron
+Chaos Blade (NG) - ConWisStr
+Irithyll Rapier (NG) - ConWisStr
+Greatlance (NG+) - MintBerryCrushh
+Butcher Knife (NG+2) - sumohippoboggle
+Cathedral Knight Greatsword (NG+3) - StochasticGD
+Great Machete (NG) - Vltrykin
+Great Wooden Hammer (NG+) - Recurv3
+Black Knight Sword (NG+2) - FlagStealer
+Carthus Shotel (NG) - ryanexodus
+Heysel Pick (NG+) - geco2353
+Onikiri and Ubadachi (NG+2) - martyr_berry
+Smough's Great Hammer (NG+3) - conniptionsgiven
+Drang Hammers (NG) - TealLantern
+Winged Knight Twinaxes (NG) - Vltrykin
+Manikin Claws (NG+) - UnicornBunnyCoffee
+Ringed Knight Straight Sword (NG+2) - Ton2thesky
+Friede's Great Scythe (NG+3) - KentuckyFriedeChicken
+Crescent Moon Sword (NG) - Ton2thesky
+Lothric War Banner (NG+) - UnicornBunnyCoffee
+Twin Princes' Greatsword (NG+2) - Skorpia_de
+Follower Sabre (NG) - PierrotGriff
+Red Hilted Halberd (NG+) - mestyo
+Barbed Straight Sword (NG) - Munstadim
+Blacksmith Hammer (NG) - Weider96
+Immolation Tinder (NG+) - UnicornBunnyCoffee
+Murakumo (NG+2) - curiouspeanut
+Cleric's Candlestick (NG+3) - lord_booples
+Tailbone Short Sword (NG+4) - PeakyFkingBlinder
+Estoc (NG+5) - NOCTU4
+Claymore (NG) - Yanrishatum
+Sunlight Straight Sword (NG+) - sinistercamel
+Gael's Greatsword (NG) - Gankzzzz
+Crow Talons (NG) - sapphyrah
+Dark Hand (NG) - xDecc
+Dragonslayer Swordspear (NG+) - unkownx3
+Black Blade (NG) - xKrAzY_8sx
+Painting Guardian's Curved Sword (NG+) - majestic_bunny
+Ricard's Rapier (NG+2) - PopcornNinja101
+Golden Ritual Spear (NG+3) - 23edsa
+Large Club (NG+4) - motoko_kusanagi
+Sellsword Twinblades (NG) - jamiemsm
+Parrying Dagger (NG) - Dank_Souls_Solaire
+Storm Ruler (NG+) - UnicornBunnyCoffee

@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <title>Decc's Infinite Permadeath</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="weapons.js"></script>
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <picture>
+    <source srcset="res/bg/dks3background.jpg" media="(min-width: 1000px)">
+    <source srcset="res/bg/dks3background-mobile.jpg" media="(min-width: 600px)">
+    <img class="bg" srcset="res/bg/dks3background.jpg" alt="">
+    </picture>
+    
+    <div class="container">
+      <div class="container-bg">
+        
+        <div class="stretch"></div>
+        <div class="fixed top"></div>
+        <div class="fixed bottom"></div>
+        <!-- <img class="fixed" style="top: 0;" src="res/bg/bg_top.png">
+        <img class="fixed" style="bottom: 0;" src="res/bg/bg_bot.png"> -->
+      </div>
+    <div class="decor decor-tl"></div>
+    <div class="decor decor-tr"></div>
+    <div class="decor decor-bl"></div>
+    <div class="decor decor-br"></div>
+    <h1>Decc’s Infinite Permadeath runs</h1>
+    <h4 id="counter"></h4>
+    <div class="filter-tab">
+      <div class="filter-container">
+        <div id="filter_focus_bg"></div>
+        <div id="filter_focus">Filter<span class="filter-colon">:</span><span class="filter-ellipsis">...</span></div>
+        <input id="filter">
+        <!-- SVGs are from font awesmoe, yada-yada legal stuff -->
+        <div id="filterIcon" class="filter-icon"></div>
+        <div id="clearFilter" class="filter-icon"></div>
+        <!-- <svg id="filterIcon" class="filter-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M487.976 0H24.028C2.71 0-8.047 25.866 7.058 40.971L192 225.941V432c0 7.831 3.821 15.17 10.237 19.662l80 55.98C298.02 518.69 320 507.493 320 487.98V225.941l184.947-184.97C520.021 25.896 509.338 0 487.976 0z"/></svg> -->
+        <!-- <svg id="clearFilter" class="filter-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M192 188v216c0 6.627-5.373 12-12 12h-24c-6.627 0-12-5.373-12-12V188c0-6.627 5.373-12 12-12h24c6.627 0 12 5.373 12 12zm100-12h-24c-6.627 0-12 5.373-12 12v216c0 6.627 5.373 12 12 12h24c6.627 0 12-5.373 12-12V188c0-6.627-5.373-12-12-12zm132-96c13.255 0 24 10.745 24 24v12c0 6.627-5.373 12-12 12h-20v336c0 26.51-21.49 48-48 48H80c-26.51 0-48-21.49-48-48V128H12c-6.627 0-12-5.373-12-12v-12c0-13.255 10.745-24 24-24h74.411l34.018-56.696A48 48 0 0 1 173.589 0h100.823a48 48 0 0 1 41.16 23.304L349.589 80H424zm-269.611 0h139.223L276.16 50.913A6 6 0 0 0 271.015 48h-94.028a6 6 0 0 0-5.145 2.913L154.389 80zM368 128H80v330a6 6 0 0 0 6 6h276a6 6 0 0 0 6-6V128z"/></svg> -->
+      </div>
+      <div class="filter-switch">
+        <div id="filter_switch" type="button">
+          <span id="filter_caret"></span>
+        </div>
+        <span id="switch_label">All weapons</span>
+      </div>
+    </div>
+    <div id="weapons">
+      <h3 class="category">Categories</h3>
+      <div class="category-list" id="category_list">
+        
+      </div>
+    </div>
+    <div class="footer">
+      <!-- <img src="https://static-cdn.jtvnw.net/emoticons/v1/782267/1.0"> -->
+      <img class="face" src="res/faces/angery.png">
+      <img class="face" src="res/faces/huh.png">
+      <img class="face" src="res/faces/cult.png">
+      <img class="face" src="res/faces/mad.png">
+      <img class="face" src="res/faces/sun.png">
+      <img class="face" src="res/faces/what.png">
+      <img class="face" src="res/faces/cat.png">
+      <img class="face" src="res/faces/tac.png">
+    </div>
+  </div>
+  
+  <div id="fextraInfo">
+    <div class="fextra-stat str"></div>
+    <span id="fextra_str">99</span>
+    <div class="fextra-stat dex"></div>
+    <span id="fextra_dex">99</span>
+    <div class="fextra-stat int"></div>
+    <span id="fextra_int">99</span>
+    <div class="fextra-stat fai"></div>
+    <span id="fextra_fai">99</span>
+  </div>
+</body>
+</html>

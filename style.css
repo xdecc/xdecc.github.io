@@ -1,0 +1,596 @@
+
+@font-face
+{
+  font-family: 'OptimusPrinceps';
+  src: url('res/OptimusPrinceps.ttf');
+}
+
+@font-face
+{
+  font-family: 'OptimusPrinceps';
+  src: url('res/OptimusPrincepsSemiBold.ttf');
+  font-weight: bold;
+}
+
+body,::placeholder,input
+{
+  font-family: 'OptimusPrinceps', arial, sans, sans-serif;
+}
+
+body,a,#filter,.filter-icon
+{
+  color: #cecece;
+}
+
+
+.container
+{
+  position: relative;
+  
+  max-width: 1280px;
+  min-height: 600px;
+  
+  padding-top: 2em;
+  
+  overflow-x: hidden;
+  
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+/* Tiling background */
+
+.container-bg
+{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+
+.container-bg .fixed
+{
+  position: absolute;
+  background-size: contain;
+  
+  left: 0;
+  width: 100%;
+  height: 20px;
+}
+
+.container-bg .fixed.top
+{
+  top: 0;
+  background-image: url('res/bg/bg_top.png');
+}
+
+.container-bg .fixed.bottom
+{
+  background-image: url('res/bg/bg_bot.png');
+  bottom: 0;
+}
+
+.container-bg .stretch
+{
+  position: absolute;
+  
+  background-image: url('res/bg/bg.png');
+  background-size: contain;
+  
+  top: 5px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 10px);
+}
+
+/* Corner decorations */
+
+.decor
+{
+  background-image: url('res/bg/decor.png');
+  position: absolute;
+  width: 256px;
+  height: 256px;
+}
+
+.decor-tl
+{
+  left: 10px;
+  top: 15px;
+  transform: rotate(90deg);
+}
+
+.decor-tr
+{
+  right: 10px;
+  top: 15px;
+  transform: rotate(180deg);
+}
+
+.decor-bl
+{
+  left: 10px;
+  bottom: 10px;
+}
+
+.decor-br
+{
+  right: 10px;
+  bottom: 10px;
+  transform: rotate(-90deg);
+}
+
+img.bg {
+  min-height: 100%;
+  min-width: 1920px;
+  z-index: -1;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+
+.footer
+{
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+h4,h3,h1,.footer
+{
+  text-align: center;
+}
+
+h1
+{
+  background: url('res/header_big.png') no-repeat center top;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+h3
+{
+  background: url('res/header.png') no-repeat center top;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* Weapons */
+
+.category-list
+{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.weapon
+{
+  margin-top: 1em;
+  margin-left: 0.2em;
+  margin-right: 0.2em;
+}
+
+.weapon,.weapon>a
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 180px;
+}
+
+.weapon-name
+{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.weapon img
+{
+  max-height: 100px;
+  padding: 8px;
+  background: url('res/regular.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.weapon.finished img
+{
+  background-image: url('res/finished.png');
+}
+
+.weapon.finished>a>div
+{
+  position: relative;
+}
+
+.attempt
+{
+  font-size: 80%;
+}
+
+/* Filters */
+
+.filter-tab,.filter-switch
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.filter-container
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  
+  position: relative;
+  
+  background: url('res/edit.png') no-repeat left bottom;
+  
+  height: 30px;
+  width: 240px;
+  padding: 2px 8px;
+}
+
+#filter_focus,#filter::placeholder,#filter
+{
+  font-size: 13.3333px;
+}
+
+#filter_focus
+{
+  position: absolute;
+  left: 17px;
+  top: 10px;
+  color: gray;
+  transition: color 0.4s ease, left 0.4s ease;
+}
+
+#filter_focus .filter-ellipsis,#filter_focus .filter-colon
+{
+  transition: opacity 0.4s ease;
+}
+
+#filter_focus .filter-ellipsis
+{
+  opacity: 1;
+  position: relative;
+  left: -3px;
+}
+
+#filter_focus .filter-colon
+{
+  opacity: 0;
+}
+
+#filter_focus_bg
+{
+  position: absolute;
+  background: url('res/edit_focus.png') no-repeat;
+  width: 216px;
+  height: 25px;
+  left: -201px;
+  top: 4px;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.filter-container.active #filter_focus
+{
+  color: #cecece;
+  left: -35px;
+}
+
+.filter-container.active #filter_focus .filter-colon
+{
+  opacity: 1;
+}
+
+.filter-container.active #filter_focus .filter-ellipsis
+{
+  opacity: 0;
+}
+
+.filter-container.active #filter_focus_bg
+{
+  opacity: 0.4;
+}
+
+#filter
+{
+  background: none;
+  width: calc(100% - 18px);
+  border: none;
+  z-index: 1;
+}
+
+#filter:focus
+{
+  outline: none;
+}
+
+.filter-icon
+{
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  right: 3px;
+  
+  opacity: 1;
+  transition: all 0.3s;
+}
+
+.filter-container:not(.active) #clearFilter,
+.filter-container.active #filterIcon
+{
+  /* display: none; */
+  right: -16px;
+  opacity: 0;
+}
+
+#filterIcon
+{
+  background: url('res/icon_filter.png');
+}
+
+#clearFilter
+{
+  background: url('res/icon_trash.png');
+  cursor: pointer;
+  z-index: 2;
+}
+
+/* .filter-show
+{
+  
+} */
+
+.filter-hide
+{
+  display: none;
+  /*opacity: 0.2;*/
+}
+
+#filter_switch
+{
+  margin: 3px 0.5em;
+  background: url('res/switch_bg.png') no-repeat center;
+  width: 60px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+#filter_caret
+{
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  top: 3px;
+  left: 3px;
+  /* background: #ab966f; */
+  background: url('res/switch_caret.png');
+  border-radius: 10px;
+  transition: left 0.2s ease;
+  
+  -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,1);
+  -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,1);
+  box-shadow: 0px 0px 5px 1px rgba(0,0,0,1);
+}
+
+#filter_caret.center
+{
+  left: 19px;
+}
+
+#filter_caret.right
+{
+  left: 37px;
+}
+
+#switch_label
+{
+  display: inline-block;
+  align-self: center;
+  width: 120px;
+}
+
+.weapon .custom,.weapon .custom>div
+{
+  position: relative;
+  width: 160px;
+  height: 160px;
+}
+
+.weapon .custom
+{
+  background: url('res/regular.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: scale(0.8);
+  margin-top: -20px;
+  margin-bottom: -20px;
+}
+.weapon.finished .custom
+{
+  background-image: url('res/finished.png');
+}
+.weapon .custom::before
+{
+  content: "";
+  background: url('res/panel.png');
+  width: 96;
+  height: 33;
+  left: 32px;
+  bottom: 10px;
+  position: absolute;
+}
+
+.page0
+{
+  background-image: url('res/p0.png');
+}
+
+.page1
+{
+  background-image: url('res/p1.png');
+}
+
+.page2
+{
+  background-image: url('res/p2.png');
+}
+
+#category_list
+{
+  margin: -30px 0px;
+}
+
+#category_list .weapon
+{
+  transform: scale(0.5);
+  font-size: 160%;
+  margin: -30px -96px;
+  width: 260px;
+}
+
+#category_list .weapon:nth-child(odd) .weapon-name
+{
+  padding-top: 1.5em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.category::after
+{
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 22px;
+  position: absolute;
+  background: url('res/up.png');
+  opacity: 0;
+  transition: all 0.2s;
+}
+
+.category
+{
+  cursor: pointer
+}
+
+.category:hover::after
+{
+  opacity: 1;
+}
+
+#fextraInfo
+{
+  position: absolute;
+  flex-direction: row;
+  transform: translateX(-50%);
+  align-items: center;
+  justify-content: space-around;
+  font-size: 140%;
+  width: 250px;
+  background: url('res/info.png') no-repeat;
+  padding: 14px 8px;
+  display: flex;
+  animation-fill-mode: forwards;
+  transition: left 0.2s ease, top 0.2s ease;
+}
+
+@keyframes hideFextra
+{
+  0% {
+    display: flex;
+    opacity: 1;
+  }
+  100% {
+    display: none;
+    opacity: 0;
+  }
+}
+
+@keyframes showFextra
+{
+  0% {
+    opacity: 0;
+    display: flex;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#fextraInfo.notransition
+{
+  transition: none !important;
+}
+
+#fextraInfo.shown
+{
+  opacity: 1;
+  animation: showFextra 0.2s;
+  /* animation-direction: reverse; */
+}
+
+#fextraInfo:not(.shown)
+{
+  /* display: none; */
+  opacity: 0;
+  animation: hideFextra 0.2s;
+}
+
+#fextraInfo>span
+{
+  padding-top: 4px;
+}
+
+.fextra-stat
+{
+  background: url('res/info_icons.png') no-repeat;
+  width: 26px;
+  height: 26px;
+}
+
+.fextra-stat.dex
+{
+  background-position-x: -26px;
+}
+
+.fextra-stat.int
+{
+  background-position-x: -52px;
+}
+
+.fextra-stat.fai
+{
+  background-position-x: -78px;
+}
+
+.face
+{
+  display: none;
+  width: 28px;
+  height: 28px;
+}
+
+.face.active
+{
+  display: initial;
+}
