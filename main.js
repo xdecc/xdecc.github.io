@@ -34,7 +34,7 @@ function init()
   var faces = document.querySelectorAll(".face");
   faces[Math.floor(Math.random() * faces.length)].classList.add("active");
   
-  fetch("runs.txt").then(function(resp) {
+  fetch("runs.txt", { cache: "no-cache" }).then(function(resp) {
     if (resp.ok)
     {
       return resp.text();
