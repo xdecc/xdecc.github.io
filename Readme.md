@@ -1,12 +1,16 @@
 # Decc's Infinite Permadeath run counter
 
-Made by [Yanrishatum](@Yanrishatum) for Decc because I wanted to.  
+Made by [Yanrishatum](https://github.com/Yanrishatum) for Decc because I wanted to.  
 This work was made under public domain with exception of used acces which are belong to their respective owners, refer to Asset sources section. Hence, you are free to fork and make version for DS1/DS2/DeS/BB/modify for your channel/whatever without any restrictions and credits.
 
 ## Basic usage
 1. Host on your site/github.io page
 2. Edit runs.txt according to format
 3. That's it.
+
+### URL specifics
+* Adding `#completed` or `#finished` hash to the url will switch page to "Completed only" filter.
+* Adding `#incomplete` or `#unfinished` hash to the url will switch page to "Incomplete only" filter.
 
 ### `runs.txt` format
 * `#` at the beginning of the line considered a commentary and ignored.
