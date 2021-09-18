@@ -1,5 +1,6 @@
 var weaponIndex = {};
 
+var weaponsTotal = 0;
 var finished = [];
 
 function init()
@@ -31,8 +32,25 @@ function init()
   document.getElementById("filter_switch").addEventListener("click", switchFilter);
   document.getElementById("clearFilter").addEventListener("click", clearFilter);
   
-  var faces = document.querySelectorAll(".face");
-  faces[Math.floor(Math.random() * faces.length)].classList.add("active");
+  var faces = [
+    'angery.png', 'ayaya.png',       'blush.png',
+    'cat.png',    'cheffkiss.png',   'concern.png',
+    'cool.png',   'cult.png',        'd.png',
+    'dog.gif',    'dread.png',       'gasm.png',
+    'gnome.png',  'hands.png',       'happy.png',
+    'hiyo.png',   'huh.png',         'hypers.png',
+    'kek.png',    'mad.png',         'nerd.png',
+    'nice.png',   'notlikedecc.png', 'oof.png',
+    'pain.png',   'pensive.png',     'pog.gif',
+    'pray.png',   's.png',           'shrug.png',
+    'shrug2.png', 'smile.png',       'smug.png',
+    'sun.png',    'tac.png',         'test.png',
+    'think.png',  'what.png',        'woah.png',
+    'wow.png'
+  ];
+  var currFace = document.querySelector(".face");
+  currFace.src = "res/faces/" + faces[Math.floor(Math.random() * faces.length)];
+  currFace.classList.add("active");
   
   fetch("runs.txt", { cache: "no-cache" }).then(function(resp) {
     if (resp.ok)
@@ -77,7 +95,7 @@ function init()
       var result = {
         weapon: weapon,
         finished: edata[3].indexOf("#d") == -1,
-        user: edata[3],
+        user: (edata[3]||"").replace(/_/g, " _ "), // Fix Optimus font underscore
         ng: edata[2]
       };
       if (!weapon.attempts) weapon.attempts = [];
@@ -103,7 +121,7 @@ function init()
       else if (location.hash == "#unfinished" || location.hash == "#incomplete") switchFilter(null, 2);
     }
     
-    document.getElementById("counter").textContent = "Weapons finished: " + total + "; Top cycle: " + maxNG.toLowerCase();
+    document.getElementById("counter").textContent = "Weapons finished: " + total + "; Top cycle: " + maxNG.toLowerCase() + "; Weapons left: " + (weaponsTotal - total);
     
     for (var c of Array.from(document.querySelectorAll(".category")))
     {
@@ -128,6 +146,7 @@ function showCategory(category)
   container.classList.add("category-list");
   
   var list = weapons.filter( (v) => v.type == category );
+  weaponsTotal += list.length;
   
   function makeWeapon(weapon, id, label, href, target)
   {

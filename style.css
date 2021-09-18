@@ -456,6 +456,12 @@ h3
   background-image: url('res/p2.png');
 }
 
+.page3
+{
+  background-image: url('res/p3.png');
+  background-size: 160px;
+}
+
 #category_list
 {
   margin: -30px 0px;
