@@ -1,6 +1,7 @@
 # Format: <weapon_name> (NG<+X>) - <nickname>[#d]
 # Adding #d to end will create an entry of shame.
 # No typos in weapon names allowed.
+Fists (NG) - xDecc
 Profaned Greatsword (NG) - ForgottenReaper
 Frayed Blade (NG+) - unrecovered
 Harald Curved Greatsword (NG+2) - TheLauron
