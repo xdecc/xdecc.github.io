@@ -1,7 +1,7 @@
 # Format: <weapon_name> (NG<+X>) - <nickname>[#d]
 # Adding #d to end will create an entry of shame.
 # No typos in weapon names allowed.
-Fists (NG) - xDecc
+Fists (NG) - Decc
 Profaned Greatsword (NG) - ForgottenReaper
 Frayed Blade (NG+) - unrecovered
 Harald Curved Greatsword (NG+2) - TheLauron
@@ -38,7 +38,7 @@ Claymore (NG) - Yanrishatum
 Sunlight Straight Sword (NG+) - sinistercamel
 Gael's Greatsword (NG) - Gankzzzz
 Crow Talons (NG) - sapphyrah
-Dark Hand (NG) - xDecc
+Dark Hand (NG) - Decc
 Dragonslayer Swordspear (NG+) - unkownx3
 Black Blade (NG) - xKrAzY_8sx
 Painting Guardian's Curved Sword (NG+) - majestic_bunny
@@ -51,7 +51,7 @@ Storm Ruler (NG+) - UnicornBunnyCoffee
 Rotten Ghru Curved Sword (NG+2) - senor_moisture
 Morning Star (NG+3) - aalbot
 Demon's Fist (NG+4) - Petey_
-Broken Straight Sword (NG) - xDecc
+Broken Straight Sword (NG) - Decc
 Claw (NG+) - Yanrishatum
 Onyx Blade (NG+2) - RafaelOnTwitch
 Pickaxe (NG) - mestyo
@@ -75,3 +75,4 @@ Dark Sword (NG+4) - mediocre_master
 Greatsword (NG) - radioactive_bath_86
 Dragon Tooth (NG+) - SariaSlays
 Earth Seeker (NG+2) - Nifran
+Yhorm's Great Machete (NG+3) - Decc
