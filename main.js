@@ -156,6 +156,27 @@ function showCategory(category)
     
     var anchor = document.createElement("a");
     anchor.href = href;
+    anchor.addEventListener("click", function(e) {
+      if (!e.shiftKey) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        navigator.clipboard.writeText(label);
+        var cp = document.querySelector("#copied")
+        var rect = e.currentTarget.getBoundingClientRect();
+        cp.classList.remove("show");
+        cp.style.left = (rect.x + rect.width / 2) + "px";
+        cp.style.top = (rect.y - cp.clientHeight - 8 + window.scrollY) + "px";
+        requestAnimationFrame(() => cp.classList.add('show'));
+        if (label == "Soldering Iron") {
+          var a = new Audio("./res/whatashame.mp3");
+          document.body.appendChild(a);
+          a.autoplay = true;
+          a.volume = 0.3;
+          a.load();
+          a.play();
+        }
+      }
+    });
     if (target) anchor.target = target;
     
     var div = document.createElement("div");
