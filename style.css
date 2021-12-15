@@ -504,6 +504,11 @@ h3
   opacity: 1;
 }
 
+.note {
+  text-align: center;
+  padding-top: 1em;
+}
+
 #fextraInfo
 {
   position: absolute;
@@ -541,6 +546,41 @@ h3
   100% {
     opacity: 1;
   }
+}
+
+@keyframes copiedAnim
+{
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+#copied {
+  opacity: 0;
+  animation-timing-function: ease-in-out;
+  pointer-events: none;
+  position: absolute;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 110%;
+  width: 265px;
+  height: 61px;
+  background: url(res/info.png) no-repeat;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+#copied.show {
+  animation: copiedAnim 2s;
 }
 
 #fextraInfo.notransition
