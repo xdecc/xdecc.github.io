@@ -144,7 +144,7 @@ img.bg {
 }
 
 a { text-decoration: none; }
-a:hover { text-decoration: underline; }
+a:hover .weapon-name { text-decoration: underline; }
 
 h4,h3,h1,.footer
 {
@@ -465,20 +465,43 @@ h3
 #category_list
 {
   margin: -30px 0px;
+  gap: 0.4em;
 }
 
 #category_list .weapon
 {
-  transform: scale(0.5);
+  /* transform: scale(0.5);
   font-size: 160%;
   margin: -30px -96px;
-  width: 260px;
+  width: 260px; */
+  font-size: 80%;
+  min-width: initial;
+  margin: 0;
+  margin-top: 1.5em;
+  padding-bottom: 5em;
+}
+
+#category_list .weapon>a {
+  min-width: initial;
+  position: relative;
+  width: 60px;
+  height: 80px;
+}
+#category_list .weapon>a>.custom {
+  transform: scale(0.5);
+  margin: 0;
+  top: -50%;
+}
+#category_list .weapon .weapon-name {
+  position: absolute;
+  bottom: 0;
+  top: 100%;
+  white-space: nowrap;
 }
 
 #category_list .weapon:nth-child(odd) .weapon-name
 {
   padding-top: 1.5em;
-  white-space: nowrap;
   text-overflow: ellipsis;
 }
 
