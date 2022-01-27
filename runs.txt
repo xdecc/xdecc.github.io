@@ -147,3 +147,5 @@ Executioner's Greatword (NG+) - DoubleDs_TM
 Notched Whip (NG+2) - mahmudov108
 Great Club (NG+3) - TreKronor
 Warpick (NG+4) - HeapUnderflow
+Greataxe (NG+5) - Decc
+Tailbone Spear (NG+6) - Thoreas
