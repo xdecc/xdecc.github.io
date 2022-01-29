@@ -150,3 +150,4 @@ Warpick (NG+4) - HeapUnderflow
 Greataxe (NG+5) - Decc
 Tailbone Spear (NG+6) - Thoreas
 Greatsword of Judgment (NG) - popopp9
+Scimitar (NG+) - mahmudov108
