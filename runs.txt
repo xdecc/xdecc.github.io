@@ -175,3 +175,5 @@ Crescent Axe (NG+) - ChofHel
 Spiked Mace (NG+2) - dran78
 Winged Spear (NG+3) - PineAppleontoPizza
 Glaive (NG+4) - NewschooI
+Pike (NG+5) - ChofHel
+Hand Axe (NG+6) - sliponknot
