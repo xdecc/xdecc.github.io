@@ -124,7 +124,7 @@ async function init()
   if (location.hash == "#completed" || location.hash == "#finished") switchFilter(null, 1);
   else if (location.hash == "#unfinished" || location.hash == "#incomplete") switchFilter(null, 2);
   
-  if (total == weaponsTotal || true) {
+  if (total == weaponsTotal) {
     const container = document.getElementById("chronological");
     document.getElementById("absolute_madman").classList.add("fuck-me-he-did-it");
     let lastNg = -1;
