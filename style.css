@@ -462,10 +462,50 @@ h3
   background-size: 160px;
 }
 
+.page4
+{
+  background-image: url('res/p4.webp');
+  background-size: 160px;
+}
+
+#absolute_madman {
+  display: none;
+}
+#absolute_madman.fuck-me-he-did-it {
+  display: initial;
+}
+
 #category_list
 {
   margin: -30px 0px;
   gap: 0.4em;
+}
+
+/* #absolute_madman .weapon {
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+#absolute_madman .weapon.chrono-show {
+  animation: chronoShake 0.2s;
+  opacity: 1;
+} */
+
+@keyframes chronoShake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
 
 #category_list .weapon
@@ -654,6 +694,7 @@ h3
 
 .face
 {
+  cursor: pointer;
   display: none;
   width: 28px;
   height: 28px;
