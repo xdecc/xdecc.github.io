@@ -177,3 +177,5 @@ Winged Spear (NG+3) - PineAppleontoPizza
 Glaive (NG+4) - NewschooI
 Pike (NG+5) - ChofHel
 Hand Axe (NG+6) - sliponknot
+Partizan (NG+7) - NoirPainNET
+Dagger (NG+8) - Midew
