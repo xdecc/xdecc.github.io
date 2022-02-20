@@ -3,7 +3,7 @@ var weaponIndex = {};
 var weaponsTotal = 0;
 var finished = [];
 
-function init()
+async function init()
 {
   showCategory("Daggers");
   showCategory("Straight Swords");
@@ -50,9 +50,11 @@ function init()
   ];
   var currFace = document.querySelector(".face");
   currFace.src = "res/faces/" + faces[Math.floor(Math.random() * faces.length)];
+  currFace.addEventListener("click", () => {
+    currFace.src = "res/faces/" + faces[Math.floor(Math.random() * faces.length)];
+  });
   currFace.classList.add("active");
-  
-  fetch("runs.txt", { cache: "no-cache" }).then(function(resp) {
+  const data = await fetch("runs.txt", { cache: "no-cache" }).then(function(resp) {
     if (resp.ok)
     {
       return resp.text();
@@ -61,74 +63,176 @@ function init()
   }, function (reason)
   {
     document.getElementById("counter").textContent = "Couldn't load runs.txt with reason: " + reason;
-  }).then(function (data)
-  {
-    var all = data.split("\n");
-    var total = 0;
-    var maxNG = "NG";
-    
-    function findName(name)
-    {
-      var lcase = name.toLowerCase();
-      for (var w of weapons)
-      {
-        if (w.name == name || w.name.toLowerCase() == lcase) return w;
-      }
-      return null;
-    }
-
-    for (var entry of all)
-    {
-      if (entry.charAt(0) == "#") continue;
-      var edata = /(.*) \((NG\+?[0-9]*)\) - (.*)(#d)?/.exec(entry);
-      if (!edata)
-      {
-        if (entry.trim().length != 0) console.warn("Invalid entry: \"" + entry + "\"");
-        continue;
-      }
-      var weapon = findName(edata[1]);
-      if (weapon == null)
-      {
-        console.warn('couldn\'t find weapon with name "' + edata[1] + '"');
-        continue;
-      }
-      var result = {
-        weapon: weapon,
-        finished: edata[3].indexOf("#d") == -1,
-        user: (edata[3]||"").replace(/_/g, " _ "), // Fix Optimus font underscore
-        ng: edata[2]
-      };
-      if (!weapon.attempts) weapon.attempts = [];
-      weapon.attempts.push(result);
-      
-      if (!result.finished) result.user = result.user.substr(0, result.user.length-2);
-      var wdiv = document.getElementById(weapon.id);
-      if (result.finished && !wdiv.classList.contains("finished"))
-      {
-        weapon.finished = true;
-        wdiv.classList.add("finished");
-        total++;
-        if (result.ng > maxNG) maxNG = result.ng;
-      }
-      
-      var div = document.createElement("div");
-      div.classList.add("attempt");
-      div.textContent = result.user + " (" + result.ng + (result.finished ? ")" : ", died)");
-      wdiv.appendChild(div);
-      finished.push(result);
-      
-      if (location.hash == "#completed" || location.hash == "#finished") switchFilter(null, 1);
-      else if (location.hash == "#unfinished" || location.hash == "#incomplete") switchFilter(null, 2);
-    }
-    
-    document.getElementById("counter").textContent = "Weapons finished: " + total + "; Top cycle: " + maxNG.toLowerCase() + "; Weapons left: " + (weaponsTotal - total);
-    
-    for (var c of Array.from(document.querySelectorAll(".category")))
-    {
-      c.addEventListener("click", goUp);
-    }
-    
   });
+  if (!data) return;
+  
+  var all = data.split("\n");
+  var total = 0;
+  var maxNG = "NG";
+  
+  function findName(name)
+  {
+    const lcase = name.toLowerCase();
+    return weapons.find((w) => w.name == name || w.name.toLowerCase() == lcase);
+  }
+  /** @type {{ w: weapon, finished: boolean, user: string, ng: string }[]} */
+  const chrono = [];
+
+  for (var entry of all)
+  {
+    if (entry.charAt(0) == "#" || entry.trim().length == 0) continue;
+    
+    var edata = /(.*) \((NG\+?[0-9]*)\) - (.*)(#d)?/.exec(entry);
+    if (!edata)
+    {
+      if (entry.trim().length != 0) console.warn("Invalid entry: \"" + entry + "\"");
+      continue;
+    }
+    var weapon = findName(edata[1]);
+    if (weapon == null)
+    {
+      console.warn('couldn\'t find weapon with name "' + edata[1] + '"');
+      continue;
+    }
+    var result = {
+      weapon: weapon,
+      finished: edata[3].indexOf("#d") == -1,
+      user: (edata[3]||"").replace(/_/g, " _ "), // Fix Optimus font underscore
+      ng: edata[2]
+    };
+    if (!weapon.attempts) weapon.attempts = [];
+    weapon.attempts.push(result);
+    
+    if (!result.finished) result.user = result.user.substr(0, result.user.length-2);
+    var wdiv = document.getElementById(weapon.id);
+    if (result.finished && !wdiv.classList.contains("finished"))
+    {
+      weapon.finished = true;
+      wdiv.classList.add("finished");
+      total++;
+      chrono.push(result);
+      if (result.ng > maxNG) maxNG = result.ng;
+    }
+    
+    var div = document.createElement("div");
+    div.classList.add("attempt");
+    div.textContent = result.user + " (" + result.ng + (result.finished ? ")" : ", died)");
+    wdiv.appendChild(div);
+    finished.push(result);
+  }
+  
+  if (location.hash == "#completed" || location.hash == "#finished") switchFilter(null, 1);
+  else if (location.hash == "#unfinished" || location.hash == "#incomplete") switchFilter(null, 2);
+  
+  if (total == weaponsTotal) {
+    const container = document.getElementById("chronological");
+    document.getElementById("absolute_madman").classList.add("fuck-me-he-did-it");
+    let lastNg = -1;
+    let maxNg = 0;
+    const deadWeapon = weapons.find((w) => w.id == -2);
+    let resets = 0;
+    // let delay = 1500;
+    // const delay_step = 250;
+    for (const result of chrono) {
+      if (result.weapon.id < 0) {
+        continue; // Skip fists.
+      }
+      
+      const realNg = result.ng.toLowerCase() == "ng" ? 0 : (result.ng.toLowerCase() == "ng+" ? 1 : parseInt(result.ng.match(/\d+/)[0]));
+      if (realNg <= lastNg) {
+        const disp = makeWeapon(deadWeapon, "chrono-" + deadWeapon.id, deadWeapon.name + (lastNg == 0 ? " at NG+" : " at NG+"+(lastNg+1)), undefined, undefined, false);
+        if (maxNg < lastNg) {
+          const record = document.createElement("div");
+          record.classList.add("attempt");
+          record.textContent = "New NG record!";
+          disp.appendChild(record);
+          maxNg = lastNg;
+        }
+        container.appendChild(disp);
+        // setTimeout(() => disp.classList.add("chrono-show"), delay);
+        // delay += delay_step;
+        resets++;
+      }
+      // if (maxNg < realNg) maxNg = realNg;
+      lastNg = realNg;
+      
+      const disp = makeWeapon(result.weapon, "chrono-" + result.weapon.id, result.weapon.name, undefined, undefined);
+      const who = document.createElement("div");
+      who.classList.add("attempt");
+      who.textContent = result.user + " (" + result.ng + ")";
+      disp.appendChild(who);
+      // setTimeout(() => disp.classList.add("chrono-show"), delay);
+      // delay += delay_step;
+      container.appendChild(disp);
+    }
+    const stats = document.getElementById("stats");
+    stats.innerText = "Total run resets (consecutive death do not count): " + resets;
+  }
+  
+  document.getElementById("counter").textContent = "Weapons finished: " + total + "; Top cycle: " + maxNG.toLowerCase() + "; Weapons left: " + (weaponsTotal - total);
+  
+  for (var c of Array.from(document.querySelectorAll(".category")))
+  {
+    c.addEventListener("click", goUp);
+  }
+}
+
+function makeWeapon(weapon, id, label, href, target, isCategory = false)
+{
+  var wdiv = document.createElement("div");
+  wdiv.classList.add("weapon");
+  wdiv.id = id;
+  
+  var anchor = document.createElement("a");
+  if (href) anchor.href = href;
+  if (!isCategory) {
+    anchor.addEventListener("click", function(e) {
+      if (!e.shiftKey) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        navigator.clipboard.writeText(label);
+        var cp = document.querySelector("#copied")
+        var rect = e.currentTarget.getBoundingClientRect();
+        cp.classList.remove("show");
+        cp.style.left = (rect.x + rect.width / 2) + "px";
+        cp.style.top = (rect.y - cp.clientHeight - 8 + window.scrollY) + "px";
+        requestAnimationFrame(() => cp.classList.add('show'));
+        if (label == "Soldering Iron") {
+          var a = new Audio("./res/whatashame.mp3");
+          document.body.appendChild(a);
+          a.autoplay = true;
+          a.volume = 0.3;
+          a.load();
+          a.play();
+        }
+      }
+    });
+  }
+  if (target) anchor.target = target;
+  
+  var div = document.createElement("div");
+  if (weapon.i == 0 && weapon.j == 0 && weapon.p == 0)
+  {
+    var img = new Image();
+    img.src = weapon.icon;
+    div.appendChild(img);
+  }
+  else
+  {
+    var cont = document.createElement("div");
+    div.classList.add("custom");
+    cont.classList.add("page" + weapon.p);
+    cont.style.backgroundPositionX = (-weapon.i * 160) + "px";
+    cont.style.backgroundPositionY = (-weapon.j * 160) + "px";
+    div.appendChild(cont);
+  }
+  anchor.appendChild(div);
+  div = document.createElement("div");
+  div.classList.add("weapon-name");
+  div.textContent = label;
+  anchor.appendChild(div);
+  wdiv.appendChild(anchor);
+  return wdiv;
 }
 
 // Init: Create category listing.
@@ -147,64 +251,6 @@ function showCategory(category)
   
   var list = weapons.filter( (v) => v.type == category );
   weaponsTotal += list.length;
-  
-  function makeWeapon(weapon, id, label, href, target, isCategory = false)
-  {
-    var wdiv = document.createElement("div");
-    wdiv.classList.add("weapon");
-    wdiv.id = id;
-    
-    var anchor = document.createElement("a");
-    anchor.href = href;
-    if (!isCategory) {
-      anchor.addEventListener("click", function(e) {
-        if (!e.shiftKey) {
-          e.preventDefault();
-          e.stopImmediatePropagation();
-          navigator.clipboard.writeText(label);
-          var cp = document.querySelector("#copied")
-          var rect = e.currentTarget.getBoundingClientRect();
-          cp.classList.remove("show");
-          cp.style.left = (rect.x + rect.width / 2) + "px";
-          cp.style.top = (rect.y - cp.clientHeight - 8 + window.scrollY) + "px";
-          requestAnimationFrame(() => cp.classList.add('show'));
-          if (label == "Soldering Iron") {
-            var a = new Audio("./res/whatashame.mp3");
-            document.body.appendChild(a);
-            a.autoplay = true;
-            a.volume = 0.3;
-            a.load();
-            a.play();
-          }
-        }
-      });
-    }
-    if (target) anchor.target = target;
-    
-    var div = document.createElement("div");
-    if (weapon.i == 0 && weapon.j == 0 && weapon.p == 0)
-    {
-      var img = new Image();
-      img.src = weapon.icon;
-      div.appendChild(img);
-    }
-    else
-    {
-      var cont = document.createElement("div");
-      div.classList.add("custom");
-      cont.classList.add("page" + weapon.p);
-      cont.style.backgroundPositionX = (-weapon.i * 160) + "px";
-      cont.style.backgroundPositionY = (-weapon.j * 160) + "px";
-      div.appendChild(cont);
-    }
-    anchor.appendChild(div);
-    div = document.createElement("div");
-    div.classList.add("weapon-name");
-    div.textContent = label;
-    anchor.appendChild(div);
-    wdiv.appendChild(anchor);
-    return wdiv;
-  }
   
   var cw = makeWeapon(list[0], "c_" + category, category, "#" + category, undefined, true);
   cw.classList.add("category-weapon");
